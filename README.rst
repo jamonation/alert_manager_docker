@@ -1,5 +1,5 @@
-Getting started with docker
-###########################
+alert_manager development using Docker
+######################################
 
 To get started:
 
@@ -15,5 +15,8 @@ Notes
 =====
 
 If you use Windows, the docker run command may not expose the alert_manager directory to the container.
-In that case, use and explicit path to the current directory in place of $PWD. For example:
+In that case, use an explicit path to the current directory in place of $PWD. For example:
 ``C:\Program Files\alert_manager_docker`` or wherever you've placed the codebase.
+
+Edit files directly on your host system for development. Docker will expose your alert_manager directory
+into the container so that any changes made outside propagate into the docker container.
