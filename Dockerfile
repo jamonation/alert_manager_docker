@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # Install packages
-RUN apt-get -y install mysql-server libmysqlclient-dev apache2-mpm-worker libapache2-mod-wsgi python-dev python-pip git curl bzip2 supervisor
+RUN apt-get -q -y install mysql-server libmysqlclient-dev python-dev python-pip git curl bzip2 supervisor uwsgi uwsgi-plugin-python
 RUN mkdir /srv/www
 RUN mkdir -p /var/log/supervisor
 
@@ -22,13 +22,12 @@ RUN ["/bin/rm", "/tmp/requirements.txt"]
 ADD populate_mysql.sh /tmp/populate_mysql.sh
 ADD alert_manager/sample/july_alerts.sql.bz2 /tmp/alerts.sql.bz2
 RUN ["/bin/bash", "/tmp/populate_mysql.sh"]
-
-# Configure apache2
-ADD alert_manager.conf /etc/apache2/sites-available/alerts.conf
-RUN ["/usr/sbin/a2dissite", "000-default"]
-RUN ["/usr/sbin/a2ensite", "alerts"]
+RUN ["/bin/rm", "/tmp/populate_mysql.sh", "/tmp/alerts.sql.bz2"]
 
 EXPOSE 80
+
+# Put uwsgi config in place
+ADD uwsgi.ini /etc/uwsgi/apps-enabled/uwsgi.ini
 
 # Unset DEBIAN_FRONTEND per http://docs.docker.com/reference/builder/#env
 ENV DEBIAN_FRONTEND ''
