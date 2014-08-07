@@ -8,7 +8,7 @@ To get started:
 3. ``cd alert_manager_docker``
 4. ``git submodule update --init --recursive`` to pull forked alert_manager into your working directory
 5. ``docker build -t mozilla/alert_manager .`` to create your local docker container
-6. ``docker run -p 8080:80 -v $PWD/alert_manager:/srv/www/alert_manager mozilla/alert_manager``
+6. ``docker run -p 8080:5000 -v $PWD/alert_manager:/srv/www/alert_manager mozilla/alert_manager``
 7. Visit http://localhost:8080/alerts.html in your browser
 
 Notes
