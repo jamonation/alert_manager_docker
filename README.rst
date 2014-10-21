@@ -1,22 +1,39 @@
 alert_manager development using Docker
 ######################################
 
-To get started:
+Linux based Alert Manager development with Docker:
+==================================================
 
 1. Visit https://docs.docker.com/installation/ and get docker up and running on your system
 2. ``git clone https://github.com/jamonation/alert_manager_docker.git`` to a directory of your choosing
-3. ``cd alert_manager_docker``
-4. ``git submodule update --init --recursive`` to pull forked alert_manager into your working directory
-5. ``docker build -t mozilla/alert_manager .`` to create your local docker container
-6. ``docker run -p 8080:5000 -v $PWD/alert_manager:/srv/www/alert_manager mozilla/alert_manager``
-7. Visit http://localhost:8080/alerts.html in your browser
+3. Run ``virtualenv alert_manager_docker`` or whatever directory you decided to clone into to setup the Python virtual environment
+4. ``cd alert_manager_docker`` or into the name of the directory into which you cloned the git repository
+5. ``source bin/activate; pip install -r requirements.txt`` to activate the virtual environment,
+and to install the required python modules for docker based development.
+6. ``git submodule update --init --recursive`` to pull forked alert_manager into your working directory
+7. Run ``cd dockerfiles; ./build_docker_images.sh`` to create your local docker containers
+8. Run ``fig up`` to start the collection of containers.
+9. Visit http://localhost:8080/alerts.html in your browser
 
-Notes
-=====
 
-If you use Windows, the docker run command may not expose the alert_manager directory to the container.
-In that case, use an explicit path to the current directory in place of $PWD. For example:
-``C:\Program Files\alert_manager_docker`` or wherever you've placed the codebase.
+OSX based Alert Manager development with Docker:
+==================================================
 
-Edit files directly on your host system for development. Docker will expose your alert_manager directory
-into the container so that any changes made outside propagate into the docker container.
+1. Visit https://docs.docker.com/installation/ and get docker up and running on your system
+2. ``git clone https://github.com/jamonation/alert_manager_docker.git`` to a directory of your choosing
+3. Run ``virtualenv alert_manager_docker`` or whatever directory you decided to clone into to setup the Python virtual environment
+4. ``cd alert_manager_docker`` or into the name of the directory into which you cloned the git repository
+5. ``source bin/activate; pip install -r requirements.txt`` to activate the virtual environment,
+and to install the required python modules for docker based development.
+6. ``git submodule update --init --recursive`` to pull forked alert_manager into your working directory
+7. Run ``cd dockerfiles; ./build_docker_images.sh`` to create your local docker containers
+8. Run ``fig up`` to start the collection of containers.
+9. Browse the address that the shell script noted.
+
+
+OSX based Alert Manager development with Docker:
+================================================
+
+Not ready yet. The build script is Linux/OSX based. However, the docker commands in it
+can be run manually. If you can get fig working in a python virtualenv it should be
+straightforward to run the development environment until a proper script is available.

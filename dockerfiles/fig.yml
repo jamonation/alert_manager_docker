@@ -1,0 +1,15 @@
+database:
+  image: ateam/alert_manager_db
+  volumes_from:
+    - data
+  expose:
+    - "3306"
+
+alertmanager:
+  image: ateam/alert_manager
+  volumes:
+    - /Users/admin/alertManagerDocker/alert_manager:/srv/www/alert_manager
+  ports:
+    - "8000:8159"
+  links:
+    - database
