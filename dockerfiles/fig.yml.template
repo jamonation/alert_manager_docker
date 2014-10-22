@@ -6,10 +6,8 @@ database:
     - "3306"
 
 alertmanager:
-  image: ateam/alert_manager
-  volumes:
-    - /Users/admin/alertManagerDocker/alert_manager:/srv/www/alert_manager
+  image: ateam/alert_manager_web
   ports:
-    - "8000:8159"
+    - "8080:8159"
   links:
     - database
